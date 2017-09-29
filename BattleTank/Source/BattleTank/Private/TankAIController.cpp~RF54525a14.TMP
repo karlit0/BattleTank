@@ -2,7 +2,7 @@
 
 #include "TankAIController.h"
 #include "Tank.h"
-#include "Engine/World.h"
+#include "Engine\World.h"
 #include "TankPlayerController.h"
 
 ATank* ATankAIController::GetControlledTank() const
@@ -17,12 +17,8 @@ ATank* ATankAIController::GetPlayerTank() const
 
 	APlayerController* playerController =  GetWorld()->GetFirstPlayerController();
 	if (playerController)
-	{		
+	{
 		ATankPlayerController* tankPlayerController = Cast<ATankPlayerController>(playerController);
-		if (tankPlayerController)
-		{
-			tank = tankPlayerController->GetControlledTank();
-		}
 	}
 
 	return tank;
@@ -43,16 +39,6 @@ void ATankAIController::BeginPlay()
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AIController not possessing a tank"));
-	}
-
-	ATank* playerTank = GetPlayerTank();
-	if (playerTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AIController found playerTank: %s"), *playerTank->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("AIController not found playerTank"));
 	}
 }
 
