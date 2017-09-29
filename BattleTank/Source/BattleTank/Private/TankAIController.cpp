@@ -13,19 +13,15 @@ ATank* ATankAIController::GetControlledTank() const
 
 ATank* ATankAIController::GetPlayerTank() const
 {
-	ATank* tank = nullptr;
+	ATank* playerTank = nullptr;
 
 	APlayerController* playerController =  GetWorld()->GetFirstPlayerController();
 	if (playerController)
 	{		
-		ATankPlayerController* tankPlayerController = Cast<ATankPlayerController>(playerController);
-		if (tankPlayerController)
-		{
-			tank = tankPlayerController->GetControlledTank();
-		}
+		playerTank = Cast<ATank>(playerController->GetPawn());
 	}
 
-	return tank;
+	return playerTank;
 }
 
 
