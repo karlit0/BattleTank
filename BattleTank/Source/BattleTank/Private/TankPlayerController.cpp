@@ -78,7 +78,7 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 	if (DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, cameraWorldLocation, OutLookDirection))
 	{
 		ret = true;
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *cameraWorldLocation.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *OutLookDirection.ToString());
 	}
 
 	return ret;
