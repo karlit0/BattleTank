@@ -23,10 +23,16 @@ public:
 private:
 	ATank* GetControlledTank() const;
 	// Start the tank moving the barrel so that a shot would hit where
-	// the crosshair intersects the world
+	// the cross-hair intersects the world
 	void AimTowardsCrosshair();
 
 	// return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
+private:
+	UPROPERTY(EditAnywhere)
+	float	CrossHairXLocation = 0.5f;
+	UPROPERTY(EditAnywhere)
+	float	CrossHairYLocation = 0.33333f;
 
 };
