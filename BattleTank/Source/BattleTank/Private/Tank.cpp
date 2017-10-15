@@ -38,10 +38,10 @@ void ATank::Fire()
 	if (!Barrel)
 		return;
 	
-	UE_LOG(LogTemp, Warning, TEXT("Fire!"));
-
 	// Spawn a projectile at the socket location on the barrel
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Rotation")));
+	AProjectile* projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Rotation")));
+
+	projectile->LaunchProjectile(LaunchSpeed);
 }
 
 // Called when the game starts or when spawned
