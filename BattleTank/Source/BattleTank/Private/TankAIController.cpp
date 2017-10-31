@@ -27,6 +27,9 @@ void ATankAIController::Tick(float DeltaTime)
 		// Move towards the player
 		MoveToActor(playerTank, AcceptanceRadius); // TODO check radius is in cm
 
+		FVector tankForward = controlledTank->GetActorForwardVector().GetSafeNormal();
+		FVector AIForwardIntention = (playerTank->GetActorLocation() - controlledTank->GetActorLocation()).GetSafeNormal();
+
 		// Aim towards the player
 		controlledTank->AimAt(playerTank->GetActorLocation());
 
