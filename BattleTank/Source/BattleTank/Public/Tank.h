@@ -20,6 +20,8 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
@@ -30,6 +32,8 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
+
+	// TODO remove later
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000.f;
 
