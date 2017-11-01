@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAIController.h"
-#include "Tank.h"
 #include "Engine/World.h"
 #include "TankPlayerController.h"
+#include "TankAimingComponent.h"
 // Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
@@ -14,27 +14,34 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	ATank* controlledTank = Cast<ATank>(GetPawn());
-	ATank* playerTank = nullptr;
+
+	APawn* controlledTank = GetPawn();
+	if (!ensure(controlledTank))
+		return;
+
 	APlayerController* playerController = GetWorld()->GetFirstPlayerController();
-	if (ensure(playerController))
-	{
-		playerTank = Cast<ATank>(playerController->GetPawn());
-	}
+	if (!ensure(playerController))
+		return;
 
-	if (ensure(controlledTank) && ensure(playerTank))
-	{
-		// Move towards the player
-		MoveToActor(playerTank, AcceptanceRadius); // TODO check radius is in cm
+	APawn* playerTank = nullptr;
+	playerTank = playerController->GetPawn();
+	if (!ensure(playerTank))
+		return;
 
-		FVector tankForward = controlledTank->GetActorForwardVector().GetSafeNormal();
-		FVector AIForwardIntention = (playerTank->GetActorLocation() - controlledTank->GetActorLocation()).GetSafeNormal();
+	UTankAimingComponent* aimingComponent = controlledTank->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(aimingComponent))
+		return;
 
-		// Aim towards the player
-		controlledTank->AimAt(playerTank->GetActorLocation());
+	// Move towards the player
+	MoveToActor(playerTank, AcceptanceRadius); // TODO check radius is in cm
 
-		controlledTank->Fire(); // TODO limit firing rate
-	}
+	FVector tankForward = controlledTank->GetActorForwardVector().GetSafeNormal();
+	FVector AIForwardIntention = (playerTank->GetActorLocation() - controlledTank->GetActorLocation()).GetSafeNormal();
+
+	// Aim towards the player
+	aimingComponent->AimAt(playerTank->GetActorLocation());
+
+	// TODO fix firing
+	//controlledTank->Fire(); // TODO limit firing rate
 }
 

@@ -8,7 +8,6 @@
 
 class UTankBarrel;
 class UTankTurret;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -24,12 +23,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
-
-	void AimAt(FVector HitLocation);
-
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
 
 private:
 
