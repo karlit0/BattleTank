@@ -8,7 +8,7 @@
 
 // Enum for aiming state
 UENUM()
-enum class EFiringStatus : uint8 
+enum class EFiringState : uint8 
 {
 	Reloading,
 	Aiming,
@@ -41,7 +41,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = State)
-	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+	EFiringState FiringState = EFiringState::Reloading;
 
 private:
 	UTankBarrel* Barrel = nullptr;
@@ -57,8 +57,11 @@ private:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	double LastFireTime = 0;
+	FVector AimDirection;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	bool IsBarrelMoving() const;
 
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 };
