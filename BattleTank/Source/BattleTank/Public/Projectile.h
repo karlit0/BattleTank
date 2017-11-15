@@ -14,6 +14,10 @@ class BATTLETANK_API AProjectile : public AActor
 {
 	GENERATED_BODY()
 	
+private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
 public:	
 	// Sets default values for this actor's properties
 	AProjectile();
@@ -31,6 +35,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UParticleSystemComponent *LaunchBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	UParticleSystemComponent *ImpactBlast = nullptr;
 
 public:	
 	// Called every frame
