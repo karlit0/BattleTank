@@ -37,6 +37,11 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, float LineTraceRange, FVector& OutHitLocation) const;
 
+	virtual void SetPawn(APawn* InPawn) override; // gets called on pawn possesion
+
+	UFUNCTION()
+	void OnPossesedTankDeath();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	float	CrossHairXLocation = 0.5f;
