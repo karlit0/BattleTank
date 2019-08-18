@@ -68,7 +68,7 @@ private:
 	double LastFireTime = 0;
 	FVector AimDirection;	
 
-	void MoveBarrelTowards(FVector AimDirection);
+	void MoveBarrelTowards(FVector TargetAimDirection);
 
 	bool IsBarrelMoving() const;
 
